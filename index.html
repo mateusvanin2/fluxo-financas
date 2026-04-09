@@ -7,12 +7,6 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="theme-color" content="#0d0d14">
 <title>Fluxo — Finanças</title>
-<link rel="manifest" href="manifest.json">
-<meta name="mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="Fluxo">
-<link rel="apple-touch-icon" href="icon-192.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&display=swap" rel="stylesheet">
 <style>
@@ -106,23 +100,7 @@ select option { background: var(--surface2); }
 /* ═══════════════════════════════════════
    HEADER
 ═══════════════════════════════════════ */
-.app-header {
-  padding: calc(var(--s4) + var(--safe-top)) var(--s4) var(--s3);
-  background: var(--bg);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-shrink: 0;
-  border-bottom: 1px solid var(--border);
-}
-.header-left .app-name {
-  font-family: var(--font-display);
-  font-size: 20px;
-  font-weight: 800;
-  letter-spacing: -0.5px;
-}
-.header-left .app-name span { color: var(--primary); }
-.header-left .greeting { font-size: 12px; color: var(--text-3); margin-top: 1px; }
+
 
 .month-pill {
   display: flex;
@@ -1076,33 +1054,11 @@ async function confirmarLimpeza() {
      HOME SCREEN
 ══════════════════════════════ -->
 <div class="screen active" id="sc-home">
-  <div class="app-header">
-    <div class="header-left">
-      <div class="app-name">Flu<span>xo</span></div>
-      <div class="greeting">Suas finanças em dia ✦</div>
-    </div>
-    <div style="display:flex;align-items:center;gap:8px">
-      <span id="saveIndicator" style="font-size:10px;color:var(--text-3);opacity:0;transition:opacity .3s;font-weight:600"></span>
-      <button onclick="const m=document.getElementById('backupMenu');m.style.display=m.style.display==='none'?'block':'none'" style="width:34px;height:34px;border-radius:50%;background:var(--surface2);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:16px;cursor:pointer;">⚙️</button>
-    </div>
-  </div>
-  <!-- Backup menu -->
-  <div id="backupMenu" style="display:none;position:absolute;top:70px;right:16px;background:var(--surface2);border:1px solid var(--border2);border-radius:var(--r-lg);padding:8px;z-index:200;min-width:200px;box-shadow:var(--shadow-lg)"
-    <div style="font-size:11px;color:var(--text-3);font-weight:700;text-transform:uppercase;letter-spacing:.8px;padding:4px 8px 8px">Backup & Segurança</div>
-    <button onclick="exportBackup();document.getElementById('backupMenu').style.display='none'" style="width:100%;padding:10px 12px;text-align:left;border-radius:10px;font-size:13px;font-weight:600;color:var(--text-1);background:none;border:none;cursor:pointer;display:flex;align-items:center;gap:8px">📥 Exportar backup JSON</button>
-    <label style="width:100%;padding:10px 12px;text-align:left;border-radius:10px;font-size:13px;font-weight:600;color:var(--text-1);cursor:pointer;display:flex;align-items:center;gap:8px;position:relative">
-      📤 Restaurar backup
-      <input type="file" accept=".json" onchange="importBackup(event);document.getElementById('backupMenu').style.display='none'" style="position:absolute;inset:0;opacity:0;cursor:pointer;width:100%"/>
-    </label>
-    <div style="height:1px;background:var(--border);margin:4px 0"></div>
-    <div style="padding:8px 12px;font-size:11px;color:var(--text-3);line-height:1.5">💡 Dados salvos em nuvem + local. Exporte backup regularmente por segurança.</div>
-  </div>
-
-  <!-- Seletor de mês em destaque -->
-  <div style="padding:12px 16px 8px;background:var(--bg);border-bottom:1px solid var(--border);flex-shrink:0;display:flex;align-items:center;justify-content:space-between">
+  <!-- Header compacto com mês + config -->
+  <div style="flex-shrink:0;background:var(--bg);border-bottom:1px solid var(--border);padding:12px 16px;display:flex;align-items:center;justify-content:space-between">
     <div>
-      <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--text-3);margin-bottom:2px">Período selecionado</div>
-      <select id="mesSelect" onchange="changeMes()" style="background:none;border:none;font-family:var(--font-display);font-size:22px;font-weight:800;color:var(--text-1);outline:none;cursor:pointer;padding:0;letter-spacing:-0.5px;max-width:220px">
+      <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--text-3);margin-bottom:1px">Período</div>
+      <select id="mesSelect" onchange="changeMes()" style="background:none;border:none;font-family:var(--font-display);font-size:20px;font-weight:800;color:var(--text-1);outline:none;cursor:pointer;padding:0;letter-spacing:-0.5px">
         <option value="12">Janeiro 2026</option>
         <option value="13">Fevereiro 2026</option>
         <option value="14">Março 2026</option>
@@ -1111,7 +1067,10 @@ async function confirmarLimpeza() {
         <option value="17">Junho 2026</option>
       </select>
     </div>
-    <span id="saveIndicator" style="font-size:10px;color:var(--text-3);opacity:0;transition:opacity .3s;font-weight:600"></span><button onclick="goScreen('sc-config',null)" style="width:36px;height:36px;border-radius:50%;background:var(--surface2);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:14px;flex-shrink:0">⚙️</button>
+    <div style="display:flex;align-items:center;gap:6px">
+      <span id="saveIndicator" style="font-size:10px;color:var(--text-3);opacity:0;transition:opacity .3s;font-weight:600"></span>
+      <button onclick="goScreen('sc-config',null)" style="width:34px;height:34px;border-radius:50%;background:var(--surface2);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:13px">⚙️</button>
+    </div>
   </div>
 
   <div class="scroll-area">
@@ -1239,27 +1198,32 @@ async function confirmarLimpeza() {
 ══════════════════════════════ -->
 <div class="screen" id="sc-ia">
   <div class="chat-screen-header">
-    <div style="display:flex;align-items:center">
-      <div class="chat-screen-title">Assistente</div>
-      <div class="ai-badge">✦ IA</div>
+    <div style="display:flex;align-items:center;justify-content:space-between">
+      <div style="display:flex;align-items:center;gap:8px">
+        <div class="chat-screen-title">Agente IA</div>
+        <div class="ai-badge">✦ Claude</div>
+      </div>
+      <button onclick="limparChat()" style="font-size:11px;color:var(--text-3);background:none;border:none;cursor:pointer;padding:4px 8px;border-radius:8px;border:1px solid var(--border)">Limpar</button>
     </div>
-    <div class="chat-screen-sub">Fale seus gastos — eu registro automaticamente</div>
+    <div class="chat-screen-sub">Pergunte sobre seus gastos ou fale um lançamento</div>
   </div>
 
   <div class="chat-messages" id="chatMsgs">
-    <div class="msg-bubble bot">Olá! Sou seu assistente financeiro com IA. Posso:<br><br>• Registrar gastos automaticamente<br>• Analisar suas finanças<br>• Dar dicas personalizadas<br><br>Tente falar um gasto! 👇</div>
+    <div class="msg-bubble bot">Olá! Sou seu agente financeiro. Posso analisar seus dados, registrar gastos e responder perguntas como:<br><br>💬 "quanto gastei em comida esse mês?"<br>💬 "economizei em comparação ao mês passado?"<br>💬 "gastei 45 no mercado"<br>💬 "qual meu maior gasto?"</div>
   </div>
 
-  <div class="suggestions" id="chatSugs">
-    <button class="sug-chip" onclick="sendSug(this)">gastei 45 no mercado</button>
-    <button class="sug-chip" onclick="sendSug(this)">quanto gastei esse mês?</button>
-    <button class="sug-chip" onclick="sendSug(this)">recebi 3500 de salário</button>
+  <div class="suggestions" id="chatSugs" style="display:flex;gap:8px;overflow-x:auto;padding:8px 16px;flex-shrink:0">
+    <button class="sug-chip" onclick="sendSug(this)">quanto gastei em comida?</button>
+    <button class="sug-chip" onclick="sendSug(this)">economizei esse mês?</button>
     <button class="sug-chip" onclick="sendSug(this)">qual meu maior gasto?</button>
-    <button class="sug-chip" onclick="sendSug(this)">dicas para economizar</button>
+    <button class="sug-chip" onclick="sendSug(this)">gastei 50 no mercado</button>
+    <button class="sug-chip" onclick="sendSug(this)">recebi meu salário 3500</button>
+    <button class="sug-chip" onclick="sendSug(this)">resumo do mês</button>
   </div>
 
-  <div class="chat-input-bar">
-    <input class="chat-field" id="chatInp" placeholder="Digite aqui..." onkeydown="if(event.key==='Enter')sendChat()"/>
+  <div class="chat-input-bar" style="display:flex;align-items:center;gap:8px;padding:10px 16px 80px;background:var(--bg);border-top:1px solid var(--border);flex-shrink:0">
+    <button id="micBtn" onclick="toggleMic()" style="width:44px;height:44px;border-radius:50%;background:var(--surface2);border:1.5px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:18px;cursor:pointer;flex-shrink:0;transition:all .2s">🎤</button>
+    <input class="chat-field" id="chatInp" placeholder="Digite ou use o microfone..." onkeydown="if(event.key==='Enter')sendChat()" style="flex:1;height:44px;background:var(--surface2);border:1.5px solid var(--border);border-radius:999px;padding:0 16px;font-size:14px;color:var(--text-1);outline:none"/>
     <button class="chat-send-btn" id="chatSendBtn" onclick="sendChat()">
       <svg fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
     </button>
@@ -1443,13 +1407,19 @@ async function confirmarLimpeza() {
 
           <div id="nuSteps">
             <div class="steps-list" id="nuStepsCSV">
-              <div class="step-row"><div class="step-num">1</div><div class="step-text">No app: <strong>Perfil → Meus Cartões → Fatura → Exportar CSV</strong></div></div>
-              <div class="step-row"><div class="step-num">2</div><div class="step-text">Salve e abra aqui 👇</div></div>
+              <div class="step-row"><div class="step-num">1</div><div class="step-text">No app Nubank: toque no <strong>ícone do cartão de crédito</strong> na tela inicial</div></div>
+              <div class="step-row"><div class="step-num">2</div><div class="step-text">Toque na <strong>fatura atual ou mês desejado</strong></div></div>
+              <div class="step-row"><div class="step-num">3</div><div class="step-text">Role até o final → toque em <strong>"Exportar fatura"</strong> → escolha <strong>CSV</strong></div></div>
+              <div class="step-row"><div class="step-num">4</div><div class="step-text">O arquivo vai para seus downloads — abra aqui 👇</div></div>
             </div>
             <div class="steps-list" id="nuStepsPDF" style="display:none">
-              <div class="step-row"><div class="step-num">1</div><div class="step-text">No app: <strong>Perfil → Meus Cartões → Fatura → Exportar PDF</strong></div></div>
-              <div class="step-row"><div class="step-num">2</div><div class="step-text">Ou use o <strong>PDF do e-mail de fatura</strong> que o Nubank envia</div></div>
-              <div class="step-row"><div class="step-num">3</div><div class="step-text">A <strong>IA vai ler e extrair</strong> tudo automaticamente 🤖</div></div>
+              <div class="step-row"><div class="step-num">1</div><div class="step-text">No app Nubank: toque no <strong>ícone do cartão de crédito</strong></div></div>
+              <div class="step-row"><div class="step-num">2</div><div class="step-text">Toque na fatura → role até o final → <strong>"Exportar fatura" → PDF</strong></div></div>
+              <div class="step-row"><div class="step-num">3</div><div class="step-text">Ou abra o <strong>e-mail de fatura</strong> que o Nubank manda e salve o PDF em anexo</div></div>
+              <div class="step-row"><div class="step-num">4</div><div class="step-text">A <strong>IA lê o PDF completo</strong> e extrai todas as compras automaticamente 🤖</div></div>
+            </div>
+            <div style="background:var(--primary-dim);border:1px solid rgba(79,124,255,0.2);border-radius:var(--r-md);padding:10px 12px;margin-bottom:12px;font-size:12px;color:var(--text-2);line-height:1.5">
+              💡 <strong style="color:var(--text-1)">Dica:</strong> O Nubank envia a fatura por e-mail todo mês. Você pode salvar esse PDF direto do e-mail e importar aqui — sem precisar abrir o app!
             </div>
           </div>
 
@@ -1888,8 +1858,16 @@ async function sendChat() {
   const items=getMes(mes);
   const rec=items.filter(i=>i.tipo==='r').reduce((s,i)=>s+parseFloat(i.valor||0),0);
   const gas=items.filter(i=>i.tipo==='g').reduce((s,i)=>s+parseFloat(i.valor||0),0);
-  const ultimos=items.slice(-8).map(i=>`${i.tipo==='g'?'-':'+'}R$${i.valor} ${i.desc}(${i.cat})`).join(', ');
-  const ctx=`MÊS:${MESES_DISP[mes]} Receitas=R$${rec.toFixed(2)} Gastos=R$${gas.toFixed(2)} Saldo=R$${(rec-gas).toFixed(2)} Últimas: ${ultimos||'nenhuma'}`;
+  // Gastos por categoria
+  const cats={};
+  items.filter(i=>i.tipo==='g').forEach(i=>{const c=i.cat.replace(/[^\w\s]/g,'').trim();cats[c]=(cats[c]||0)+parseFloat(i.valor||0);});
+  const ctxCats='GASTOS POR CATEGORIA: '+Object.entries(cats).sort((a,b)=>b[1]-a[1]).map(([c,v])=>`${c}=R$${v.toFixed(2)}`).join(', ')||'nenhum';
+  // Mês anterior
+  const itemsAnt=getMes(Math.max(0,mes-1));
+  const gasAnt=itemsAnt.filter(i=>i.tipo==='g').reduce((s,i)=>s+parseFloat(i.valor||0),0);
+  const catsAnt={};
+  itemsAnt.filter(i=>i.tipo==='g').forEach(i=>{const c=i.cat.replace(/[^\w\s]/g,'').trim();catsAnt[c]=(catsAnt[c]||0)+parseFloat(i.valor||0);});
+  const ctx=`MÊS ATUAL: ${MESES_DISP[mes]} | Receitas=R$${rec.toFixed(2)} | Gastos=R$${gas.toFixed(2)} | Saldo=R$${(rec-gas).toFixed(2)} | MÊS ANTERIOR: Gastos=R$${gasAnt.toFixed(2)} | CATS MÊS ANT: ${Object.entries(catsAnt).map(([c,v])=>`${c}=R$${v.toFixed(2)}`).join(', ')||'nenhum'} | Todos lançamentos: ${items.map(i=>`${i.tipo==='g'?'-':'+'}R$${i.valor} ${i.desc}(${i.cat.replace(/[^\w\s]/g,'').trim()})`).join('; ')||'nenhum'}`;
 
   chatHistory.push({role:'user',content:msg});
 
@@ -1902,9 +1880,23 @@ async function sendChat() {
   try {
     const res=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({
       model:'claude-sonnet-4-20250514',max_tokens:500,
-      system:`Assistente financeiro pessoal em português. ${ctx}
-Se identificar gasto/receita com valor claro, responda APENAS JSON: {"action":"add","desc":"...","valor":0.00,"tipo":"g|r","cat":"categoria"}
-Senão, responda brevemente (máx 2 linhas) com emoji. Seja direto e amigável.`,
+      system:`Você é um agente financeiro pessoal inteligente. Responda SEMPRE em português brasileiro.
+
+DADOS DO USUÁRIO:
+${ctx}
+${ctxCats}
+
+SUAS CAPACIDADES:
+1. REGISTRAR transações → responda APENAS JSON: {"action":"add","desc":"...","valor":0.00,"tipo":"g|r","cat":"categoria"}
+2. ANALISAR gastos por categoria, período, comparações
+3. RESPONDER perguntas como: quanto gastei em comida, economizei em relação ao mês passado, maior gasto, etc.
+4. DAR dicas personalizadas baseadas nos dados reais do usuário
+
+REGRAS:
+- Se o usuário disser um gasto/receita com valor → JSON de registro
+- Se for pergunta/análise → responda em texto claro, máx 3 linhas, com números reais dos dados
+- Use os dados completos para comparações entre meses
+- Seja direto, use emojis, mencione valores reais`,
       messages:chatHistory
     })});
     const data=await res.json();
@@ -1928,6 +1920,83 @@ function addMsg(role,text) {
   div.className=`msg-bubble ${role}`;
   div.innerHTML=text.replace(/\*([^*]+)\*/g,'<strong>$1</strong>').replace(/\n/g,'<br>');
   el.appendChild(div); el.scrollTop=el.scrollHeight;
+}
+
+function limparChat() {
+  chatHistory=[];
+  document.getElementById('chatMsgs').innerHTML='<div class="msg-bubble bot">Chat limpo! Como posso ajudar?</div>';
+}
+
+/* ═══════════════════════════════════════
+   MICROFONE — Speech Recognition
+═══════════════════════════════════════ */
+let recognition=null;
+let micAtivo=false;
+
+function toggleMic() {
+  const btn=document.getElementById('micBtn');
+  const inp=document.getElementById('chatInp');
+
+  // Tenta Web Speech API (nativa do browser)
+  const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
+  if(!SR) {
+    toast('⚠️ Use o microfone do teclado do celular','');
+    return;
+  }
+
+  if(micAtivo) {
+    recognition.stop();
+    micAtivo=false;
+    btn.textContent='🎤';
+    btn.style.borderColor='var(--border)';
+    btn.style.background='var(--surface2)';
+    return;
+  }
+
+  recognition=new SR();
+  recognition.lang='pt-BR';
+  recognition.continuous=false;
+  recognition.interimResults=true;
+
+  recognition.onstart=()=>{
+    micAtivo=true;
+    btn.textContent='🔴';
+    btn.style.borderColor='var(--danger)';
+    btn.style.background='rgba(255,87,87,0.15)';
+    inp.placeholder='Ouvindo...';
+  };
+
+  recognition.onresult=(e)=>{
+    const transcript=Array.from(e.results).map(r=>r[0].transcript).join('');
+    inp.value=transcript;
+    if(e.results[0].isFinal) {
+      micAtivo=false;
+      btn.textContent='🎤';
+      btn.style.borderColor='var(--border)';
+      btn.style.background='var(--surface2)';
+      inp.placeholder='Digite ou use o microfone...';
+      if(transcript.trim()) sendChat();
+    }
+  };
+
+  recognition.onerror=()=>{
+    micAtivo=false;
+    btn.textContent='🎤';
+    btn.style.borderColor='var(--border)';
+    btn.style.background='var(--surface2)';
+    inp.placeholder='Digite ou use o microfone...';
+    toast('⚠️ Não foi possível usar microfone');
+  };
+
+  recognition.onend=()=>{
+    micAtivo=false;
+    btn.textContent='🎤';
+    btn.style.borderColor='var(--border)';
+    btn.style.background='var(--surface2)';
+    inp.placeholder='Digite ou use o microfone...';
+  };
+
+  recognition.start();
 }
 
 /* ═══════════════════════════════════════
@@ -2322,10 +2391,6 @@ document.addEventListener('click', e => {
 
 // Carrega dados persistentes e inicializa
 loadData();
-</script>
-
-<script>
-if("serviceWorker"in navigator){window.addEventListener("load",()=>{navigator.serviceWorker.register("/sw.js").catch(()=>{});});}
 </script>
 </body>
 </html>
